@@ -1,51 +1,65 @@
-const Student = require('../database/student');
+import Student from '../database/student';
 
 class StudentRepos {
 
-    all() {
-        return Student.find({}, error => {
-            if (error) throw error;
-        });
-    };
+  /**
+   *
+   */
+  all() {
+    return Student
+      .find({})
+      .exec(error => {
+        if (error) throw error;
+      });
+  };
 
-    detail(id) {
-        return Student
-            .find({_id: id})
-            .limit(1, (error) => {
-                if (error) throw error;
-            });
-    };
+  /**
+   *
+   * @param id
+   */
+  detail(id) {
+    return Student
+      .findById({ _id: id })
+      .exec(error => {
+        if (error) throw error;
+      });
+  };
 
-    add(params) {
-        let student = new Student({
-            full_name    : params.full_name,
-            date_of_birth: params.date_of_birth,
-            address      : params.address,
-            position     : params.position,
-            department   : params.department
-        });
-        return student.save(error => {
-            if (error) throw error;
-        });
-    };
+  /**
+   *
+   * @param params
+   */
+  add(params) {
+    return new Student(params)
+      .save()
+      .exec(error => {
+        if (error) throw error;
+      });
+  };
 
-    edit(params) {
-        return Student.findOneAndUpdate({_id: params.id}, {
-            full_name    : params.full_name,
-            date_of_birth: params.date_of_birth,
-            address      : params.address,
-            position     : params.position,
-            department   : params.department
-        }, error => {
-            if (error) throw error;
-        });
-    };
+  /**
+   *
+   * @param params
+   */
+  edit(params) {
+    return Student
+      .findByIdAndUpdate({ _id: params.id }, params)
+      .exec(error => {
+        if (error) throw error;
+      });
+  };
 
-    del(id) {
-        return Student.findOneAndDelete({_id: id}, error => {
-            if (error) throw error;
-        });
-    };
+  /**
+   *
+   * @param id
+   */
+  del(id) {
+    return Student
+      .findByIdAndRemove({ _id: id })
+      .exec(error => {
+        if (error) throw error;
+      });
+  };
 
 }
 

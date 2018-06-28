@@ -1,9 +1,10 @@
-import Router            from 'koa-router';
-import config            from '../config';
+import Router from 'koa-router';
+import config from '../config';
 
 // Student middleware and controller
-import validate          from '../http/middleware/validate.middleware';
-import StudentController from '../http/controller/student.controller';
+import validate              from '../http/middleware/validate.middleware';
+// import StudentController from '../http/controller/student.controller';
+import { studentController } from '../http/controller';
 
 const router = new Router();
 
@@ -12,12 +13,12 @@ const student = 'student';
 
 // Student router
 router
-    .prefix(`/${config.baseApi}/${student}`)
-    .get('/', StudentController.findAll)
-    .get('/:id', StudentController.findOne)
-    .post('/', validate, StudentController.create)
-    .put('/:id', validate, StudentController.update)
-    .delete('/:id', StudentController.delete)
+  .prefix(`/${config.baseApi}/${student}`)
+  .get('/', studentController.findAll)
+  .get('/:id', studentController.findOne)
+  .post('/', validate, studentController.create)
+  .put('/:id', validate, studentController.update)
+  .delete('/:id', studentController.delete)
 ;
 
 export default router;
