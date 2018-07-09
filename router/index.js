@@ -1,11 +1,12 @@
 import Router from 'koa-router';
 import config from '../config';
 
-// Student middleware and controller
+// Middleware
 import validate              from '../http/middleware/validate.middleware';
-// import StudentController from '../http/controller/student.controller';
+// Controller
 import { studentController } from '../http/controller';
 
+// Router
 const router = new Router();
 
 // Student api
@@ -17,7 +18,7 @@ router
   .get('/', studentController.findAll)
   .get('/:id', studentController.findOne)
   .post('/', validate, studentController.create)
-  .put('/:id', validate, studentController.update)
+  .put('/:id', validate, studentController.edit)
   .delete('/:id', studentController.delete)
 ;
 

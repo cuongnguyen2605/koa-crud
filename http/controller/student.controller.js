@@ -47,9 +47,12 @@ class StudentController {
    * Update student by id
    * @param ctx
    */
-  async update(ctx) {
+  async edit(ctx) {
     try {
-      const student = await Student.findByIdAndUpdate(ctx.params.id, ctx.student);
+      const student = await Student.findByIdAndUpdate(
+        ctx.params.id,
+        ctx.student
+      );
       if (!student) {
         ctx.throw(404);
       }
