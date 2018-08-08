@@ -1,4 +1,4 @@
-import Student from '../../database/student';
+import { studentRepos } from '../../repository';
 
 class StudentController {
 
@@ -7,7 +7,7 @@ class StudentController {
    * @param ctx
    */
   async findAll(ctx) {
-    ctx.body = await Student.find();
+    ctx.body = await studentRepos.all();
   }
 
   /**
@@ -16,7 +16,7 @@ class StudentController {
    */
   async findOne(ctx) {
     try {
-      const student = await Student.findById(ctx.params.id);
+      const student = await studentRepos.detail(ctx.params.id);
       if (!student) {
         ctx.throw(404);
       }
@@ -35,7 +35,7 @@ class StudentController {
    */
   async create(ctx) {
     try {
-      await new Student(ctx.student).save();
+      await studentRepos.create(ctx.student);
       ctx.status = 201;
       ctx.body   = { message: 'Created!' };
     } catch (err) {
@@ -49,10 +49,7 @@ class StudentController {
    */
   async edit(ctx) {
     try {
-      const student = await Student.findByIdAndUpdate(
-        ctx.params.id,
-        ctx.student
-      );
+      const student = await studentRepos.edit(ctx.params.id, ctx.student);
       if (!student) {
         ctx.throw(404);
       }
@@ -72,7 +69,7 @@ class StudentController {
    */
   async delete(ctx) {
     try {
-      const student = await Student.findByIdAndRemove(ctx.params.id);
+      const student = await studentRepos.del(ctx.params.id);
       if (!student) {
         ctx.throw(404);
       }

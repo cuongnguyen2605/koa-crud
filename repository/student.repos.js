@@ -1,16 +1,13 @@
 import Student from '../database/student';
 
+
 class StudentRepos {
 
   /**
    *
    */
   all() {
-    return Student
-      .find({})
-      .exec(error => {
-        if (error) throw error;
-      });
+    return Student.find();
   };
 
   /**
@@ -18,23 +15,15 @@ class StudentRepos {
    * @param id
    */
   detail(id) {
-    return Student
-      .findById({ _id: id })
-      .exec(error => {
-        if (error) throw error;
-      });
+    return Student.findById({ _id: id });
   };
 
   /**
    *
    * @param params
    */
-  add(params) {
-    return new Student(params)
-      .save()
-      .exec(error => {
-        if (error) throw error;
-      });
+  create(params) {
+    return new Student(params).save();
   };
 
   /**
@@ -42,11 +31,7 @@ class StudentRepos {
    * @param params
    */
   edit(params) {
-    return Student
-      .findByIdAndUpdate({ _id: params.id }, params)
-      .exec(error => {
-        if (error) throw error;
-      });
+    return Student.findByIdAndUpdate({ _id: params.id }, params);
   };
 
   /**
@@ -54,13 +39,10 @@ class StudentRepos {
    * @param id
    */
   del(id) {
-    return Student
-      .findByIdAndRemove({ _id: id })
-      .exec(error => {
-        if (error) throw error;
-      });
+    return Student.findByIdAndRemove({ _id: id });
   };
 
 }
 
-export default new StudentRepos();
+
+export default StudentRepos;
