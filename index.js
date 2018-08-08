@@ -10,7 +10,8 @@ const app = new Koa();
 
 require('koa-validate')(app);
 
-app.use(logger())
+app
+  .use(logger())
   .use(bodyParser())
   .use(cors())
   .use(router.routes())
