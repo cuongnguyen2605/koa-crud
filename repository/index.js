@@ -1,3 +1,3 @@
-import StudentRepos from './student.repos';
+import StudentRepository from './student.repository';
 
-export const studentRepos = new StudentRepos();
+export const studentRepository = new StudentRepository();

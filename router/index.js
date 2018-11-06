@@ -2,7 +2,8 @@ import Router from 'koa-router';
 import config from '../config';
 
 // Middleware
-import validate              from '../http/middleware/validate.middleware';
+import validate from '../http/middleware/validate.middleware';
+
 // Controller
 import { studentController } from '../http/controller';
 

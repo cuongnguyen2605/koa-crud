@@ -1,10 +1,10 @@
 import Student from '../database/student';
 
 
-class StudentRepos {
+class StudentRepository {
 
   /**
-   *
+   * Get all student
    */
   all() {
     return Student.find();
@@ -45,4 +45,4 @@ class StudentRepos {
 }
 
 
-export default StudentRepos;
+export default StudentRepository;
