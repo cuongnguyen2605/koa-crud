@@ -1,6 +1,7 @@
 version: 2
-job:
+jobs:
   build:
+    working_directory: ~/koa-crud
     steps:
       - checkout
       - run: echo "Hello World!"
