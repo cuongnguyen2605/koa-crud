@@ -5,22 +5,22 @@ import config from '../config';
 import validate from '../http/middleware/validate.middleware';
 
 // Controller
-import { studentController } from '../http/controller';
+import { postController } from '../http/controller';
 
 // Router
 const router = new Router();
 
-// Student api
-const student = 'student';
+// Post api
+const post = 'post';
 
-// Student router
+// Post router
 router
-  .prefix(`/${config.baseApi}/${student}`)
-  .get('/', studentController.findAll)
-  .get('/:id', studentController.findOne)
-  .post('/', validate, studentController.create)
-  .put('/:id', validate, studentController.edit)
-  .delete('/:id', studentController.delete)
+  .prefix(`/${config.baseApi}/${post}`)
+  .get('/', postController.findAll)
+  .get('/:id', postController.findOne)
+  .post('/', validate, postController.create)
+  .put('/:id', validate, postController.edit)
+  .delete('/:id', postController.delete)
 ;
 
 export default router;

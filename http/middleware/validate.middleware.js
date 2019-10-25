@@ -1,18 +1,11 @@
 export default async (ctx, next) => {
 
-  let body          = ctx.request.body,
-      full_name     = body.fullName,
-      date_of_birth = body.dateOfBirth,
-      address       = body.address,
-      position      = body.position,
-      department    = body.department
-  ;
+  let body    = ctx.request.body,
+      title   = body.title,
+      content = body.content;
 
-  ctx.checkBody('fullName').notEmpty();
-  ctx.checkBody('dateOfBirth').notEmpty();
-  ctx.checkBody('address').notEmpty();
-  ctx.checkBody('position').notEmpty();
-  ctx.checkBody('department').notEmpty();
+  ctx.checkBody('title').notEmpty();
+  ctx.checkBody('content').notEmpty();
 
   if (ctx.errors) {
     ctx.status = 401;
@@ -20,12 +13,9 @@ export default async (ctx, next) => {
     return;
   }
 
-  ctx.student = {
-    full_name,
-    date_of_birth,
-    address,
-    position,
-    department
+  ctx.post = {
+    title,
+    content
   };
 
   await next();

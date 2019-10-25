@@ -1,3 +1,3 @@
-import StudentRepository from './student.repository';
+import PostRepository from './post.repository';
 
-export const studentRepository = new StudentRepository();
+export const postRepository = new PostRepository();

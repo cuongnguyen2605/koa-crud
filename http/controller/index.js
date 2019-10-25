@@ -1,3 +1,3 @@
-import StudentController from './student.controller';
+import PostController from './post.controller';
 
-export const studentController = new StudentController();
+export const postController = new PostController();
