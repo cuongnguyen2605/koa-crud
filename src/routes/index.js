@@ -2,15 +2,13 @@ import Router from 'koa-router';
 import config from '../config';
 
 // Middleware
-import validate from '../http/middleware/validate.middleware';
+import validate from '../middleware/post.middleware';
 
 // Controller
-import { postController } from '../http/controller';
+import PostController from '../controllers/post.controller';
 
-// Router
 const router = new Router();
-
-// Post api
+const postController = new PostController();
 const post = 'post';
 
 // Post router

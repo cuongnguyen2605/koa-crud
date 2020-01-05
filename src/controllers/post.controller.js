@@ -1,28 +1,21 @@
-import { postRepository } from '../../repository';
-import { handleError }    from '../../utils/handleError';
+import PostService from '../services/post.service';
+import { handleError } from '../utils/handleError';
+
+const postService = new PostService();
 
 class PostConstroller {
-
-  /**
-   * 
-   * @param {*} ctx 
-   */
   async findAll(ctx) {
     try {
-      const posts = await postRepository.all();
+      const posts = await postService.getAll();
       ctx.body = posts;
     } catch (err) {
       handleError(ctx, err);
     }
   }
 
-  /**
-   * 
-   * @param {*} ctx 
-   */
   async findOne(ctx) {
     try {
-      const post = await postRepository.detail(ctx.params.id);
+      const post = await postService.getOne(ctx.params.id);
       if (!post) {
         ctx.throw(404);
       }
@@ -32,54 +25,42 @@ class PostConstroller {
     }
   }
 
-  /**
-   * 
-   * @param {*} ctx 
-   */
   async create(ctx) {
     try {
-      const post = await postRepository.create(ctx.post);
+      const post = await postService.create(ctx.post);
       ctx.status = 201;
-      ctx.body   = post;
+      ctx.body = post;
     } catch (err) {
       handleError(ctx, err);
     }
   }
 
-  /**
-   * 
-   * @param {*} ctx 
-   */
   async edit(ctx) {
     try {
-      const post = await postRepository.edit(ctx.params.id, ctx.post);
+      const post = await postService.update(ctx.params.id, ctx.post);
       if (!post) {
         ctx.throw(404);
       }
       ctx.status = 200;
-      ctx.body   = post;
+      ctx.body = post;
     } catch (err) {
       handleError(ctx, err);
     }
   }
 
-  /**
-   * 
-   * @param {*} ctx 
-   */
   async delete(ctx) {
     try {
-      const post = await postRepository.del(ctx.params.id);
+      const post = await postService.delete(ctx.params.id);
       if (!post) {
         ctx.throw(404);
       }
       ctx.status = 200;
-      ctx.body   = post;
+      ctx.body = post;
     } catch (err) {
       handleError(err);
     }
   }
-
 }
+
 
 export default PostConstroller;
